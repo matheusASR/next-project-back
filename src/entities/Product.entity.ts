@@ -7,7 +7,10 @@ export class Product {
   id: number;
 
   @Column({ length: 255 })
-  title: string;
+  name: string;
+
+  @Column("text")
+  description: string;
 
   @Column("json")
   content: object;

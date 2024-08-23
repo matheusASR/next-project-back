@@ -2,7 +2,8 @@ import { z } from "zod";
 
 const productSchema = z.object({
   id: z.number().positive(),
-  title: z.string().max(100),
+  name: z.string().max(100),
+  description: z.string().max(255),
   content: z.object({
     // campos
   }),

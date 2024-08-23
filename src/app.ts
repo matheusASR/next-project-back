@@ -2,7 +2,7 @@ import "reflect-metadata";
 import "express-async-errors";
 import express, { Application, json } from "express";
 import cors from "cors";
-import { loginRouter, profileRouter, userRouter } from "./routers";
+import { collectionRouter, loginRouter, productRouter, profileRouter, userRouter } from "./routers";
 import middlewares from "./middlewares";
 
 const app: Application = express();
@@ -26,6 +26,8 @@ app.use(cors(corsOptions));
 app.use("/users", userRouter);
 app.use("/login", loginRouter);
 app.use("/profile", profileRouter);
+app.use("/collections", collectionRouter);
+app.use("/products", productRouter);
 
 app.use(middlewares.handleError);
 
