@@ -19,7 +19,6 @@ const userLoginSchema = z.object({
 const userCreateSchema = userSchema.omit({ id: true });
 const userReturnSchema = userSchema.omit({
   password: true,
-  admin: true,
 });
 const userReadSchema = userReturnSchema.array();
 

@@ -9,7 +9,7 @@ userRouter.use("/:id", middlewares.verifyIdExists);
 
 userRouter.post(
   "",
-  middlewares.validateBody(userCreateSchema),
+  // middlewares.validateBody(userCreateSchema),
   middlewares.verifyEmailExists,
   userControllers.create
 );
