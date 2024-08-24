@@ -5,6 +5,7 @@ import { userReturnSchema } from "../schemas";
 const retrieve = async (id: any): Promise<any> => {
   const user: IUserReturn | null = await userRepository.findOne({
     where: { id },
+    relations: ["userProducts"]
   });
 
   return userReturnSchema.parse(user);

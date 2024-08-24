@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User.entity";
 import { Product } from "./Product.entity";
 
@@ -7,12 +7,9 @@ export class UserProduct {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @ManyToOne(() => User, (user) => user.userList)
+  @ManyToOne(() => User, (user) => user.products)
   user: User;
 
-  @ManyToOne(() => Product, (product) => product.id)
+  @ManyToOne(() => Product)
   product: Product;
-
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  addedAt: Date;
 }

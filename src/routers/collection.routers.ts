@@ -14,7 +14,7 @@ collectionRouter.post(
   collectionControllers.create
 );
 
-collectionRouter.get("", collectionControllers.read);
+collectionRouter.get("", middlewares.verifyToken, collectionControllers.read);
 
 collectionRouter.get("/:id", collectionControllers.retrieve);
 

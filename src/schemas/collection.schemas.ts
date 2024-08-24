@@ -5,6 +5,7 @@ const collectionSchema = z.object({
   name: z.string().max(100),
   description: z.string().max(100),
   coverImage: z.string().max(255),
+
 });
 const collectionCreateSchema = collectionSchema.omit({ id: true });
 const collectionReturnSchema = collectionSchema;

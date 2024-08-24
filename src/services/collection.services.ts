@@ -1,4 +1,8 @@
-import { ICollectionReturn, CollectionRead, CollectionReturn } from "../interfaces";
+import {
+  ICollectionReturn,
+  CollectionRead,
+  CollectionReturn,
+} from "../interfaces";
 import { Collection } from "../entities";
 import { collectionRepository } from "../repositories";
 import { collectionReadSchema, collectionReturnSchema } from "../schemas";
@@ -17,10 +21,13 @@ const read = async (): Promise<CollectionRead> => {
   return collectionReadSchema.parse(collections);
 };
 
-const retrieve = async (id: number): Promise<any> => {
-  const collection: ICollectionReturn | null = await collectionRepository.findOne({
-    where: { id },
-  });
+const retrieve = async (id: number): Promise<ICollectionReturn | null> => {
+  const collection: ICollectionReturn | null =
+    await collectionRepository.findOne({
+      where: { id },
+      relations: ["products"],
+    });
+
   return collection;
 };
 

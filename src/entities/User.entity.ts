@@ -3,9 +3,13 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { getRounds, hashSync } from "bcryptjs";
+import { Product } from "./Product.entity";
+import { UserProduct } from "./UserProduct.entity";
 
 @Entity("users")
 export class User {
@@ -33,8 +37,8 @@ export class User {
   @Column({ default: false })
   admin: boolean;
 
-  @Column("int", { array: true, default: () => "ARRAY[]::INTEGER[]" })
-  userList: number[];
+  @OneToMany(() => UserProduct, (userProduct) => userProduct.user)
+  products: UserProduct[];
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;

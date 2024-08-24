@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { Category } from "./Category.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Collection } from "./Collection.entity";
 
 @Entity("products")
 export class Product {
@@ -18,8 +18,8 @@ export class Product {
   @Column({ length: 255 })
   coverImage: string;
 
-  @ManyToOne(() => Category, (category) => category.products)
-  category: Category;
+  @ManyToOne(() => Collection, (collection) => collection.products)
+  collection: Collection;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;

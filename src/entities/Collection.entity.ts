@@ -1,11 +1,5 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-} from "typeorm";
-import { Category } from "./Category.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "./Product.entity";
 
 @Entity("collections")
 export class Collection {
@@ -21,9 +15,8 @@ export class Collection {
   @Column({ length: 255 })
   coverImage: string;
 
-  @OneToOne(() => Category, (category) => category.collection)
-  @JoinColumn()
-  category: Category;
+  @OneToMany(() => Product, (product) => product.collection)
+  products: Product[];
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;

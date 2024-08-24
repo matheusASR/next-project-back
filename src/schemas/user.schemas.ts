@@ -7,7 +7,7 @@ const userSchema = z.object({
   lastName: z.string().max(100),
   email: z.string().max(100),
   country: z.string().max(100),
-  userList: z.any(),
+  products: z.any(),
   password: z.string().max(120),
   admin: z.boolean().default(false),
 });

@@ -6,6 +6,7 @@ import { userCreateSchema } from "../schemas";
 export const userRouter: Router = Router();
 
 userRouter.use("/:id", middlewares.verifyIdExists);
+userRouter.use("/:productId", middlewares.verifyProductIdExists);
 
 userRouter.post(
   "",
@@ -30,4 +31,17 @@ userRouter.delete(
   middlewares.verifyToken,
   // middlewares.isAccountOwner,
   userControllers.destroy
+);
+
+userRouter.post(
+  "/:id/:productId",
+  
+  userControllers.addToList
+);
+
+userRouter.delete(
+  "/:id/:productId",
+  // middlewares.verifyToken,
+  // middlewares.isAccountOwner,
+  userControllers.removeFromList
 );

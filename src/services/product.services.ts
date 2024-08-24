@@ -1,12 +1,21 @@
 import { IProductReturn, ProductRead, ProductReturn } from "../interfaces";
 import { Product } from "../entities";
-import { productRepository } from "../repositories";
+import { collectionRepository, productRepository } from "../repositories";
 import { productReadSchema, productReturnSchema } from "../schemas";
 import { DeepPartial } from "typeorm";
 import "dotenv/config";
 
 const create = async (payload: any): Promise<ProductReturn> => {
-  const productCreated: any = productRepository.create(payload);
+  const collection: any = await collectionRepository.findOne({
+    where: { name: payload.collection },
+  });
+
+  const newPayload = {
+    ...payload, 
+    collection: collection.id, 
+  };
+
+  const productCreated: any = productRepository.create(newPayload);
   await productRepository.save(productCreated);
 
   return productReturnSchema.parse(productCreated);

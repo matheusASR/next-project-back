@@ -33,4 +33,39 @@ const destroy = async (req: Request, res: Response): Promise<Response> => {
   return res.status(204).json();
 };
 
-export default { create, read, retrieve, update, destroy };
+const addToList = async (req: Request, res: Response): Promise<Response> => {
+  const userId: number = Number(req.params.id);
+  const productId: number = Number(req.params.productId);
+
+  if (isNaN(userId) || isNaN(productId)) {
+    return res.status(400).json({ error: "Invalid userId or productId" });
+  }
+
+  try {
+    await userServices.addToList(userId, productId);
+    return res.status(200).json({ message: "Product added to list." });
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+
+const removeFromList = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const userId: number = Number(req.params.id);
+  const productId: number = Number(req.params.productId);
+  await userServices.removeFromList(userId, productId);
+  return res.status(200).json();
+};
+
+export default {
+  create,
+  read,
+  retrieve,
+  update,
+  destroy,
+  addToList,
+  removeFromList,
+};
