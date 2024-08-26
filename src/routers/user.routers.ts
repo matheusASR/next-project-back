@@ -32,16 +32,3 @@ userRouter.delete(
   // middlewares.isAccountOwner,
   userControllers.destroy
 );
-
-userRouter.post(
-  "/:id/:productId",
-  
-  userControllers.addToList
-);
-
-userRouter.delete(
-  "/:id/:productId",
-  // middlewares.verifyToken,
-  // middlewares.isAccountOwner,
-  userControllers.removeFromList
-);

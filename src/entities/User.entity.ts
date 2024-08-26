@@ -3,6 +3,7 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -37,8 +38,9 @@ export class User {
   @Column({ default: false })
   admin: boolean;
 
-  @OneToMany(() => UserProduct, (userProduct) => userProduct.user)
-  products: UserProduct[];
+  @ManyToMany(() => Product, (product) => product.users)
+  @JoinTable()
+  products: Product[];
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;

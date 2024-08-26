@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Collection } from "./Collection.entity";
+import { User } from "./User.entity";
 
 @Entity("products")
 export class Product {
@@ -20,6 +21,9 @@ export class Product {
 
   @ManyToOne(() => Collection, (collection) => collection.products)
   collection: Collection;
+
+  @ManyToMany(() => User, (user) => user.products)
+  users: User[];
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;
