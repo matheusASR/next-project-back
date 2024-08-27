@@ -4,13 +4,14 @@ import {
   userProductRepository,
   userRepository,
 } from "../repositories";
+import { userReturnSchema } from "../schemas";
 
-const addToList = async (userId: number, productId: number): Promise<User> => {
+const addToList = async (userId: number, productId: number): Promise<any> => {
   console.log(`userId: ${userId}, productId: ${productId}`); // Verifique os valores
 
   const user: any = await userRepository.findOne({
     where: { id: userId },
-    relations: ["products"],
+    relations: ["products", "products.collection"],
   });
 
   if (!user) {
@@ -30,17 +31,17 @@ const addToList = async (userId: number, productId: number): Promise<User> => {
     await userRepository.save(user); // Salva as alterações
   }
 
-  return user;
+  return userReturnSchema.parse(user);
 };
 
 const removeFromList = async (
   userId: number,
   productId: number
-): Promise<User> => {
+): Promise<any> => {
   // Encontra o usuário com os produtos relacionados
   const user: any = await userRepository.findOne({
     where: { id: userId },
-    relations: ["products"],
+    relations: ["products", "products.collection"],
   });
 
   if (!user) {
@@ -62,7 +63,7 @@ const removeFromList = async (
   // Salva as alterações do usuário
   await userRepository.save(user);
 
-  return user;
+  return userReturnSchema.parse(user);
 };
 
 export default {

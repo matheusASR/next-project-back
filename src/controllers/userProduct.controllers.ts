@@ -5,12 +5,8 @@ const addToList = async (req: Request, res: Response): Promise<any> => {
   const userId: number = Number(req.params.id);
   const productId: number = Number(req.params.productId);
 
-  try {
-    await userProductServices.addToList(userId, productId);
-    return res.status(200).json({});
-  } catch (error: any) {
-    return res.status(500).json({});
-  }
+  const response = await userProductServices.addToList(userId, productId);
+  return res.status(200).json(response);
 };
 
 const removeFromList = async (
@@ -19,11 +15,11 @@ const removeFromList = async (
 ): Promise<Response> => {
   const userId: number = Number(req.params.id);
   const productId: number = Number(req.params.productId);
-  await userProductServices.removeFromList(userId, productId);
-  return res.status(200).json();
+  const response = await userProductServices.removeFromList(userId, productId);
+  return res.status(200).json(response);
 };
 
 export default {
-    addToList,
-    removeFromList
-  };
+  addToList,
+  removeFromList,
+};

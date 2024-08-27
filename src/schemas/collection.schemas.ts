@@ -3,7 +3,7 @@ import { z } from "zod";
 const collectionSchema = z.object({
   id: z.number().positive(),
   name: z.string().max(100),
-  description: z.string().max(100),
+  description: z.string().max(255),
   coverImage: z.string().max(255),
 
 });

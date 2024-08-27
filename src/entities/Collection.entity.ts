@@ -9,13 +9,13 @@ export class Collection {
   @Column({ length: 255 })
   name: string;
 
-  @Column("text")
+  @Column({ length: 255 })
   description: string;
 
   @Column({ length: 255 })
   coverImage: string;
 
-  @OneToMany(() => Product, (product) => product.collection)
+  @OneToMany(() => Product, (product) => product.collection, { cascade: true })
   products: Product[];
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

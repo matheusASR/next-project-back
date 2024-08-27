@@ -9,7 +9,7 @@ collectionRouter.use("/:id", middlewares.verifyCollectionIdExists);
 
 collectionRouter.post(
   "",
-  middlewares.validateBody(collectionCreateSchema),
+  // middlewares.validateBody(collectionCreateSchema),
   //   middlewares.verifyCollectionNameExists,
   collectionControllers.create
 );
